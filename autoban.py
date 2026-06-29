@@ -1,7 +1,14 @@
-from telethon import TelegramClient, events
+﻿from telethon import TelegramClient, events
 from telethon.tl.functions.contacts import BlockRequest
 from datetime import datetime
 import logging
+import os
+from dotenv import load_dotenv
+
+# ==========================
+# 加载 .env 配置
+# ==========================
+load_dotenv()
 
 # ==========================
 # 开启日志（可看到 Telethon 连接情况）
@@ -14,8 +21,8 @@ logging.basicConfig(
 # ==========================
 # Telegram API
 # ==========================
-api_id =  你的 API ID         # 改成你的 API ID
-api_hash = "你的 API Hash"  # 改成你的 API Hash
+api_id = int(os.getenv("API_ID"))
+api_hash = os.getenv("API_HASH")
 
 client = TelegramClient("session", api_id, api_hash)
 
@@ -91,7 +98,7 @@ async def on_message(event):
         # 删除聊天
         await client.delete_dialog(sender.id)
 
-        print("✅ 已拉黑并删除聊天")
+        print("✓ 已拉黑并删除聊天")
 
     except Exception as e:
         print("发生错误：", e)
