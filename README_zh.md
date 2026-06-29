@@ -6,9 +6,9 @@ Telegram AutoBan 是一个基于 **Python** 和 **Telethon** 构建的 **Telegra
 
 它监控你 Telegram 账号收到的私信，并自动完成以下操作：
 
-* 馃毇 封禁发送者
-* 馃棏 删除对话
-* 馃摑 记录到 ban.log
+* 🚫 封禁发送者
+* 🗑  删除对话
+* 📝 记录到 ban.log
 
 专为想要彻底屏蔽私信骚扰的用户设计。
 
