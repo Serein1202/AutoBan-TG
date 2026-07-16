@@ -1,4 +1,4 @@
-﻿# Telegram AutoBan
+# Telegram AutoBan
 
 > Automatically block anyone who sends you a private message on Telegram.
 
@@ -6,9 +6,10 @@ Telegram AutoBan is a lightweight **Telegram Userbot** built with **Python** and
 
 It monitors incoming private messages on your Telegram account and automatically:
 
-* 🚫 Blocks the sender
-* 🗑 Deletes the conversation
-* 📝 Records the event in `ban.log`
+* 馃毇 Blocks the sender
+* 馃棏 Deletes the conversation
+* 馃摑 Records the event in `ban.log`
+* 馃灇 Sends an auto-reply notice to the blocked user
 
 Designed for users who want to completely prevent unsolicited private messages.
 
@@ -16,20 +17,23 @@ Designed for users who want to completely prevent unsolicited private messages.
 
 [中文](README_zh.md)
 
+---
+
 ## Features
 
-* 🚫 Automatically block unknown users
-* 🗑 Automatically delete the chat after blocking
-* 📝 Log every blocked user
-* ✅ Whitelist support
-* 👤 Ignore your own account
-* 📱 Ignore Telegram contacts
-* 🔒 Ignore Telegram's official account (`777000`)
-* 💻 Cross-platform (Windows / Linux / macOS)
+* 馃毇 Automatically block unknown users
+* 馃灇 Auto-reply with ban notice before blocking
+* 馃棏 Automatically delete the chat after blocking
+* 馃摑 Log every blocked user
+* 鉁? Whitelist support
+* 馃懁 Ignore your own account
+* 馃摫 Ignore Telegram contacts
+* 馃敀 Ignore Telegram's official account (`777000`)
+* 馃捇 Cross-platform (Windows / Linux / macOS)
 
 ---
 
-# Requirements
+## Requirements
 
 * Python 3.9+
 * Telegram account
@@ -38,9 +42,9 @@ Designed for users who want to completely prevent unsolicited private messages.
 
 ---
 
-# Installation
+## Installation
 
-## Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/Serein1202/AutoBan-TG.git
@@ -50,7 +54,7 @@ cd AutoBan-TG
 
 ---
 
-## Install dependencies
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -58,13 +62,13 @@ pip install -r requirements.txt
 
 ---
 
-# Getting Telegram API Credentials
+## Getting Telegram API Credentials
 
 Telegram AutoBan **does not use a Bot Token**.
 
 Instead, it authenticates using your own Telegram account through Telegram's official API.
 
-## Step 1
+### Step 1
 
 Visit:
 
@@ -74,9 +78,9 @@ Log in using your Telegram account.
 
 ---
 
-## Step 2
+### Step 2
 
-Open
+Open:
 
 ```
 API Development Tools
@@ -84,7 +88,7 @@ API Development Tools
 
 ---
 
-## Step 3
+### Step 3
 
 Create a new application.
 
@@ -98,37 +102,65 @@ Example:
 
 ---
 
-## Step 4
+### Step 4
 
-Telegram will generate:
-
-```
-API_ID
-
-API_HASH
-```
-
-Save both values.
+Telegram will generate your `API_ID` and `API_HASH`. Save both values.
 
 ---
 
-# Configuration
+## Quick Start
+
+> **Note:** On the first launch, if no `.env` file exists, the program will automatically prompt you to enter your `API_ID` and `API_HASH` interactively. You can also create `.env` manually (see [Configuration](#configuration)).
+
+Run:
+
+```bash
+python AutoBan1.1.py
+```
+
+Telethon will ask for your phone number. Example:
+
+```
++15551234567
+```
+
+Telegram will send a verification code. Enter it when prompted. If Two-Step Verification is enabled, also enter your password.
+
+After a successful login, a session file will be created automatically. You only need to log in once.
+
+---
+
+## Configuration
+
+### Option 1: Auto Setup (First Run)
+
+When running for the first time without a `.env` file, the program will guide you:
+
+```
+首次运行，请输入 Telegram API 信息：
+API_ID: 12345678
+API_HASH: 0123456789abcdef0123456789abcdef
+```
+
+A `.env` file will be created automatically.
+
+### Option 2: Manual Setup
 
 Copy the example configuration file.
 
-Linux / macOS
+Linux / macOS:
 
 ```bash
 cp .env.example .env
 ```
 
-Windows
+Windows:
 
 ```bat
 copy .env.example .env
 ```
 
-Edit `.env`
+Edit `.env`:
 
 ```env
 API_ID=12345678
@@ -137,65 +169,28 @@ API_HASH=0123456789abcdef0123456789abcdef
 
 ---
 
-# First Login
-
-Run:
-
-```bash
-python autoban.py
-```
-
-On the first launch, Telethon will ask for:
-
-```
-Phone Number
-```
-
-Example:
-
-```
-+15551234567
-```
-
-Telegram will send you a verification code.
-
-If Two-Step Verification is enabled, you will also be asked for your password.
-
-After a successful login, a session file will be created automatically.
-
-Example:
-
-```
-autoban.session
-```
-
-You only need to log in once.
-
----
-
-# Running
+## Running
 
 Start AutoBan:
 
 ```bash
-python autoban.py
+python AutoBan1.1.py
 ```
 
 The program will continue running until you stop it.
 
 Whenever someone sends you a private message, AutoBan will:
 
-1. Record the message
-2. Block the sender
-3. Delete the conversation
+1. Send an auto-reply notice to the user
+2. Record the event in `ban.log`
+3. Block the sender
+4. Delete the conversation
 
 ---
 
-# Whitelist
+## Whitelist
 
 Users inside the whitelist will never be blocked.
-
-Example:
 
 ```python
 WHITE_LIST = {
@@ -214,7 +209,7 @@ inside the message handler.
 
 ---
 
-# Logs
+## Logs
 
 Every blocked user is recorded in:
 
@@ -231,31 +226,42 @@ Name        : John Smith
 Username    : @johnsmith
 Premium     : False
 Bot         : False
-Message      : Hello!
+Message     : Hello!
 =========================================
 ```
 
 ---
 
-# Project Structure
+## Version History
+
+| Version | Description |
+|---------|-------------|
+| **AutoBan1.1.py** | Current. Added auto-reply notice, first-run .env setup wizard |
+| AutoBan1.0.py | Initial release with basic block + delete + log |
+
+---
+
+## Project Structure
 
 ```
 AutoBan-TG/
-
-├── autoban.py
+├── AutoBan1.0.py          # Initial version
+├── AutoBan1.1.py          # Latest version (recommended)
 ├── requirements.txt
 ├── .env.example
+├── .env                   # Created on first run
 ├── README.md
+├── README_zh.md
 ├── LICENSE
-├── .gitignore
+└── .gitignore
 
-├── autoban.session     # Generated after first login
-└── ban.log             # Generated automatically
+autoban.session     # Generated after first login
+ban.log             # Generated automatically
 ```
 
 ---
 
-# requirements.txt
+## requirements.txt
 
 ```text
 telethon>=1.41.0
@@ -264,16 +270,7 @@ python-dotenv>=1.0.0
 
 ---
 
-# .env.example
-
-```env
-API_ID=
-API_HASH=
-```
-
----
-
-# .gitignore
+## .gitignore
 
 ```gitignore
 # Python
@@ -308,7 +305,7 @@ Thumbs.db
 
 ---
 
-# FAQ
+## FAQ
 
 ### Does this use a Telegram Bot?
 
@@ -323,6 +320,15 @@ This project uses your own Telegram account via Telethon (Userbot).
 No.
 
 After the first successful login, Telethon creates a local session file (`autoban.session`), which will be reused automatically.
+
+---
+
+### What's the difference between AutoBan1.0.py and AutoBan1.1.py?
+
+AutoBan1.1.py is the recommended version. Key improvements:
+
+- **Auto-reply**: Sends a ban notice to the blocked user via @Serein0504_bot
+- **First-run wizard**: If `.env` is missing, prompts for credentials interactively — no manual setup needed
 
 ---
 
@@ -341,7 +347,7 @@ AutoBan can run on:
 
 ---
 
-# Security Notes
+## Security Notes
 
 Your `.session` file is your authenticated Telegram session.
 
@@ -357,7 +363,7 @@ If your session is compromised:
 
 ---
 
-# Disclaimer
+## Disclaimer
 
 This project is intended for educational and personal automation purposes.
 
@@ -367,7 +373,6 @@ The author is not responsible for any account restrictions or other consequences
 
 ---
 
-# License
+## License
 
 This project is licensed under the MIT License.
-

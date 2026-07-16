@@ -1,4 +1,4 @@
-﻿# Telegram AutoBan
+# Telegram AutoBan
 
 > 自动化屏蔽 Telegram 私信的轻量级工具。
 
@@ -6,9 +6,10 @@ Telegram AutoBan 是一个基于 **Python** 和 **Telethon** 构建的 **Telegra
 
 它监控你 Telegram 账号收到的私信，并自动完成以下操作：
 
-* 🚫 封禁发送者
-* 🗑  删除对话
-* 📝 记录到 ban.log
+* 馃毇 封禁发送者
+* 馃棏 删除对话
+* 馃摑 记录到 `ban.log`
+* 馃灇 向被拉黑用户发送自动回复通知
 
 专为想要彻底屏蔽私信骚扰的用户设计。
 
@@ -20,14 +21,15 @@ Telegram AutoBan 是一个基于 **Python** 和 **Telethon** 构建的 **Telegra
 
 ## 功能特点
 
-* 🚫 自动封禁陌生用户
-* 🗑 封禁后自动删除对话
-* 📝 记录每次封禁行为
-* ✅ 支持白名单
-* 👤 忽略自己的账号
-* 📱 忽略通讯录联系人
-* 🔒 忽略 Telegram 官方账号（777000）
-* 💻 跨平台运行（Windows / Linux / macOS）
+* 馃毇 自动封禁陌生用户
+* 馃灇 封禁前自动回复拉黑通知
+* 馃棏 封禁后自动删除对话
+* 馃摑 记录每次封禁行为
+* 鉁? 支持白名单
+* 馃懁 忽略自己的账号
+* 馃摫 忽略通讯录联系人
+* 馃敀 忽略 Telegram 官方账号（`777000`）
+* 馃捇 跨平台运行（Windows / Linux / macOS）
 
 ---
 
@@ -100,11 +102,43 @@ API Development Tools
 
 ### 第四步
 
-Telegram 会生成 API_ID 和 API_HASH，请妥善保存这两个值。
+Telegram 会生成你的 `API_ID` 和 `API_HASH`，请妥善保存这两个值。
+
+---
+
+## 快速上手
+
+### 首次运行
+
+> **注意：** 如果首次运行前没有 `.env` 文件，程序会自动引导你输入 `API_ID` 和 `API_HASH`（无需手动配置）。当然你也可以手动创建 `.env`（见下方 [配置](#配置)）。
+
+运行：
+
+```bash
+python AutoBan1.1.py
+```
+
+Telethon 会依次询问手机号（格式：+8613812345678），Telegram 会发送验证码。输入验证码后如果开启了两步验证还需输入密码。
+
+登录成功后自动创建会话文件，只需登录一次，之后自动复用。
 
 ---
 
 ## 配置
+
+### 方式一：自动引导（首次运行）
+
+如果 `.env` 文件不存在，运行程序后会提示你输入凭证：
+
+```
+首次运行，请输入 Telegram API 信息：
+API_ID: 12345678
+API_HASH: 0123456789abcdef0123456789abcdef
+```
+
+程序会自动生成 `.env` 文件。
+
+### 方式二：手动配置
 
 复制示例配置文件：
 
@@ -120,7 +154,7 @@ Windows：
 copy .env.example .env
 ```
 
-编辑 .env：
+编辑 `.env`:
 
 ```env
 API_ID=12345678
@@ -129,29 +163,20 @@ API_HASH=0123456789abcdef0123456789abcdef
 
 ---
 
-## 首次登录
-
-运行：
-
-```bash
-python autoban.py
-```
-
-首次启动时，Telethon 会依次询问手机号（格式：+8613812345678），Telegram 会发送验证码。如果开启了两步验证，还需要输入密码。
-
-登录成功后，会自动创建会话文件 autoban.session，只需登录一次，之后自动复用。
-
----
-
 ## 运行
 
 启动 AutoBan：
 
 ```bash
-python autoban.py
+python AutoBan1.1.py
 ```
 
-程序将持续运行，直到你手动停止。每当有人向你发送私信，AutoBan 会：记录消息、封禁发送者、删除对话。
+程序将持续运行，直到你手动停止。每当有人向你发送私信，AutoBan 会：
+
+1. 向对方发送拉黑通知
+2. 记录到 `ban.log`
+3. 封禁发送者
+4. 删除对话
 
 ---
 
@@ -166,13 +191,13 @@ WHITE_LIST = {
 }
 ```
 
-如何获取他人的 Telegram ID：在消息处理函数中临时添加 print(sender.id)。
+如何获取他人的 Telegram ID：在消息处理函数中临时添加 `print(sender.id)`。
 
 ---
 
 ## 日志
 
-每次封禁都会被记录到 ban.log，示例如下：
+每次封禁都会被记录到 `ban.log`，示例如下：
 
 ```
 ========== 2026-06-29 18:05:17 ==========
@@ -187,38 +212,40 @@ Message     : Hello!
 
 ---
 
+## 版本历史
+
+| 版本 | 说明 |
+|------|------|
+| **AutoBan1.1.py** | 当前版本。新增自动回复拉黑通知、首次运行 .env 配置向导 |
+| AutoBan1.0.py | 初始版本，基础封禁 + 删除对话 + 记录日志 |
+
+---
+
 ## 项目结构
 
 ```
 AutoBan-TG/
-├── autoban.py
+├── AutoBan1.0.py          # 初始版本
+├── AutoBan1.1.py          # 最新版本（推荐使用）
 ├── requirements.txt
 ├── .env.example
+├── .env                   # 首次运行后自动生成
 ├── README.md
 ├── README_zh.md
 ├── LICENSE
-├── .gitignore
+└── .gitignore
 
-├── autoban.session     # 首次登录后自动生成
-└── ban.log             # 自动生成
+autoban.session     # 首次登录后自动生成
+ban.log             # 自动生成
 ```
 
 ---
 
 ## requirements.txt
 
-```	ext
+```text
 telethon>=1.41.0
 python-dotenv>=1.0.0
-```
-
----
-
-## .env.example
-
-```env
-API_ID=
-API_HASH=
 ```
 
 ---
@@ -268,7 +295,16 @@ Thumbs.db
 
 ### 每次运行都需要登录吗？
 
-不需要。首次登录成功后，Telethon 会创建本地会话文件（autoban.session），之后自动复用。
+不需要。首次登录成功后，Telethon 会创建本地会话文件（`autoban.session`），之后自动复用。
+
+---
+
+### AutoBan1.0.py 和 AutoBan1.1.py 有什么区别？
+
+推荐使用 AutoBan1.1.py，主要改进如下：
+
+- **自动回复**：封禁前通过 @Serein0504_bot 向对方发送拉黑通知
+- **首次运行向导**：如果缺少 `.env` 文件，交互式引导配置，无需手动操作
 
 ---
 
@@ -280,13 +316,13 @@ Thumbs.db
 
 ## 安全提示
 
-你的 .session 文件是你已认证的 Telegram 会话。**请勿上传或分享。**
+你的 `.session` 文件是你已认证的 Telegram 会话。**请勿上传或分享。**
 
 如果会话泄露：
 1. 打开 Telegram
 2. 进入设置 → 设备
 3. 终止对应会话
-4. 删除本地 .session 文件
+4. 删除本地 `.session` 文件
 5. 重新登录
 
 ---

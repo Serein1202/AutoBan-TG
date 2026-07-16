@@ -76,8 +76,8 @@ async def on_message(event):
             return
 
         # 联系人
-        if sender.contact:
-            return
+        # if sender.contact:
+            # return
 
         # 白名单
         if sender.id in WHITE_LIST:
@@ -88,6 +88,9 @@ async def on_message(event):
         print(f"昵称：{sender.first_name}")
         print(f"ID：{sender.id}")
         print(f"消息：{event.raw_text}")
+
+        # 回复告知已被拉黑
+        await event.reply("未经许可私聊已被ban，请通过 @Serein0504_bot 联系")
 
         # 写日志
         write_log(sender, event.raw_text)
