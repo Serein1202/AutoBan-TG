@@ -6,10 +6,10 @@ Telegram AutoBan is a lightweight **Telegram Userbot** built with **Python** and
 
 It monitors incoming private messages on your Telegram account and automatically:
 
-* 馃毇 Blocks the sender
-* 馃棏 Deletes the conversation
-* 馃摑 Records the event in `ban.log`
-* 馃灇 Sends an auto-reply notice to the blocked user
+* ✅ Blocks the sender
+* ❌ Deletes the conversation
+* 📝 Records the event in `ban.log`
+* 🔔 Sends an auto-reply notice to the blocked user
 
 Designed for users who want to completely prevent unsolicited private messages.
 
@@ -21,15 +21,15 @@ Designed for users who want to completely prevent unsolicited private messages.
 
 ## Features
 
-* 馃毇 Automatically block unknown users
-* 馃灇 Auto-reply with ban notice before blocking
-* 馃棏 Automatically delete the chat after blocking
-* 馃摑 Log every blocked user
-* 鉁? Whitelist support
-* 馃懁 Ignore your own account
-* 馃摫 Ignore Telegram contacts
-* 馃敀 Ignore Telegram's official account (`777000`)
-* 馃捇 Cross-platform (Windows / Linux / macOS)
+* ✅ Automatically block unknown users
+* 🔔 Auto-reply with ban notice before blocking
+* ❌ Automatically delete the chat after blocking
+* 📝 Log every blocked user
+* ⚠ Whitelist support
+* 🙅 Ignore your own account
+* 📶 Ignore Telegram contacts
+* 🤖 Ignore Telegram's official account (`777000`)
+* 🏠 Cross-platform (Windows / Linux / macOS)
 
 ---
 
@@ -245,15 +245,15 @@ Message     : Hello!
 
 ```
 AutoBan-TG/
-├── AutoBan1.0.py          # Initial version
-├── AutoBan1.1.py          # Latest version (recommended)
-├── requirements.txt
-├── .env.example
-├── .env                   # Created on first run
-├── README.md
-├── README_zh.md
-├── LICENSE
-└── .gitignore
+|-- AutoBan1.0.py          # Initial version
+|-- AutoBan1.1.py          # Latest version (recommended)
+|-- requirements.txt
+|-- .env.example
+|-- .env                   # Created on first run
+|-- README.md
+|-- README_zh.md
+|-- LICENSE
+|-- .gitignore
 
 autoban.session     # Generated after first login
 ban.log             # Generated automatically
@@ -328,7 +328,7 @@ After the first successful login, Telethon creates a local session file (`autoba
 AutoBan1.1.py is the recommended version. Key improvements:
 
 - **Auto-reply**: Sends a ban notice to the blocked user via @Serein0504_bot
-- **First-run wizard**: If `.env` is missing, prompts for credentials interactively — no manual setup needed
+- **First-run wizard**: If `.env` is missing, prompts for credentials interactively -- no manual setup needed
 
 ---
 
@@ -356,7 +356,7 @@ Your `.session` file is your authenticated Telegram session.
 If your session is compromised:
 
 1. Open Telegram
-2. Go to **Settings → Devices**
+2. Go to **Settings - Devices**
 3. Terminate the corresponding session
 4. Delete the local `.session` file
 5. Log in again
